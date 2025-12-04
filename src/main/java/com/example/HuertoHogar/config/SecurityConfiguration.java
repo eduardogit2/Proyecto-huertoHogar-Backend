@@ -1,5 +1,5 @@
 package com.example.HuertoHogar.config;
-
+//swagger http://localhost:8080/swagger-ui.html
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +27,9 @@ public class SecurityConfiguration {
             .cors(Customizer.withDefaults()) 
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                // RUTAS DE SWAGGER/OPENAPI
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll() // <-- ¡ESTO ES LO QUE FALTA!
 
                 .requestMatchers("/api/v1/auth/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/productos/**").permitAll()
